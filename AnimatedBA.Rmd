@@ -1,0 +1,51 @@
+---
+title: "Animation of Balanced Accuracy"
+subtitle: "How performance metric contours change with class balance"
+author: "Jaiden Capra and David Lovell"
+date: "04/06/2022"
+knit: (function(input_file, encoding) {
+  out_dir <- 'docs';
+  rmarkdown::render(input_file,
+    encoding=encoding,
+    output_file=file.path(dirname(input_file), out_dir, 'AnimatedF1.html'))})
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+metric.name <- "Balanced Accuracy"
+metric.abbr <- "BA"
+```
+
+---
+
+![](docs/images/J.gif)
+
+---
+
+These animated plots show how the contours of `r metric.name` (`r metric.abbr`) change with class balance, i.e., as the number of negative examples ($n$) and positive examples ($p$) vary in confusion matrices of fixed size ($N$). 
+
+Each frame of this animation shows a two dimensional slice through the tetrahedral _confusion simplex_, a projection of the four dimensional confusion matrices of size $100$ into three dimensions. The animation shows slices sweeping from the edge of the simplex where $\mathrm{TP}=p, \mathrm{TN}=n$ through to the edge where $\mathrm{FN}=p, \mathrm{FP}=n$.
+
+Each coloured point corresponds to a specific confusion matrix in which 
+$$
+\begin{bmatrix}
+\mathrm{TP} & \mathrm{FP}\\
+\mathrm{FN} & \mathrm{TN}
+\end{bmatrix}=
+\begin{bmatrix}
+\mathrm{TP} & \mathrm{FP}\\
+p-\mathrm{TP} & n-\mathrm{FP}
+\end{bmatrix}
+$$
+and $N=p+n=100$. Hence, for a given $p$ and $n$, we can plot the $(p+1)\times(n+1)$ points
+whose $\mathrm{TP}$ values range from $0$ to $p$ and
+whose $\mathrm{FP}$ values range from $0$ to $n$ while overlaying the contours of the `r metric.name` performance metric ranging from $-0.9, -0.8, \dots, 0.9$.
+
+Note that
+
+* The contours of the `r metric.name` performance metric are defined continuously, but empirical confusion matrices can only take on values at the discrete points in these plots.
+* The left hand plot shows these points and `r metric.name` contours in _ROC space_ in which  a classifier's true positive \textit{rate} is plotted against its false positive _rate_ in the space of rational numbers from $[0,1]\times[0,1]$.
+* The right hand plot shows these points and `r metric.name` contours as an orthographic projection of the slice of points from the confusion simplex.
+* The left hand ROC plot is is equivalent to re-scaling the $x$-axis of (a) by a factor of $\tfrac1n$ and the $y$-axis by $\tfrac1p$.
+* As we show elsewhere, the `r metric.name` contours describe a series of planar parallel lines in ROC space that are independent of class balance.

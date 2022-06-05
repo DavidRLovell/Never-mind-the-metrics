@@ -5,7 +5,7 @@ knit: (function(input_file, encoding) {
   rmarkdown::render(input_file,
     encoding=encoding,
     output_file=file.path(dirname(input_file), out_dir, 'AllFigures.html'))})
-subtitle: "Supplementary Information - RMarkdown for Figures"
+subtitle: "Supplementary Information - All Figures and R Markdown"
 author: "David Lovell"
 date: "29/05/2022"
 output: html_document
@@ -13,7 +13,7 @@ output: html_document
 
 # About this document
 
-This document provides the RMarkdown behind the figures and interactive visualisations in our paper for anyone who wants to see how they were created or who wishes to extend them.
+This document provides the RMarkdown behind the figures and interactive visualisations in our paper for anyone who wants to see how they were created or who wishes to extend them. Some of these figures link to the [Desmos Graphing Calculator](https://www.desmos.com/). Desmos automatically ensures that the underlying code is available to copy and develop further and we provide RMarkdown for all other figures.
 
 ```{r setup, include=FALSE}
 # Start with a clean environment
@@ -188,6 +188,10 @@ make.confmat(61)  -> confmat.61
 make.confmat(100) -> confmat.100
 make.confmat(101) -> confmat.101
 ```
+
+# Interactive visualisation of ROC and Precision-Recall reference points
+
+
 
 
 # Display an interactive confusion simplex

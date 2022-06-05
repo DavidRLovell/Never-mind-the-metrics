@@ -31,6 +31,12 @@ summary(cars)
 Here's a lovely image
 ![Cardiacs](docs/images/cardiacs.png)
 
+## Embedding Desmos?
+
+I can't get the viewport in the right place!
+
+<iframe src="https://www.desmos.com/calculator/vg35tm5qlr?embed" width="100%" height="400" style="border: 1px solid #ccc" frameborder=0  data-external="1"></iframe>
+
 ## Including Plots
 
 You can also embed plots, for example:
