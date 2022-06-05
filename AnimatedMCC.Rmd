@@ -1,7 +1,7 @@
 ---
 title: "Animation of Matthews Correlation Coefficient"
 subtitle: "How performance metric contours change with class balance"
-author: "Jaiden Capra and David Lovell"
+author: "Jaiden Capra and David Lovell (David.Lovell@qut.edu.au)"
 date: "04/06/2022"
 knit: (function(input_file, encoding) {
   out_dir <- 'docs';

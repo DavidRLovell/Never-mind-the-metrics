@@ -1,13 +1,13 @@
 ---
-title: "Animation of Balanced Accuracy"
+title: "Animation of Accuracy"
 subtitle: "How performance metric contours change with class balance"
-author: "Jaiden Capra and David Lovell"
+author: "Jaiden Capra and David Lovell (David.Lovell@qut.edu.au)"
 date: "04/06/2022"
 knit: (function(input_file, encoding) {
   out_dir <- 'docs';
   rmarkdown::render(input_file,
     encoding=encoding,
-    output_file=file.path(dirname(input_file), out_dir, 'AnimatedF1.html'))})
+    output_file=file.path(dirname(input_file), out_dir, 'AnimatedAccuracy.html'))})
 output: html_document
 ---
 
