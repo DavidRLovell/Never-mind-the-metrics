@@ -21,7 +21,7 @@
 title: Never mind the metrics
 email: David.Lovell@qut.edu.au
 description: >- # this means to ignore newlines until "baseurl:"
-  Never mind the metrics --- what about the uncertainty?
+  Never mind the metrics &mdash; what about the uncertainty?
   Visualising confusion matrix performance metrics
 baseurl: "/Never-mind-the-metrics" # the subpath of your site, e.g. /blog
 url: "https://davidrlovell.github.io" # the base hostname & protocol for your site, e.g. http://example.com

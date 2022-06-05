@@ -5,15 +5,27 @@ knit: (function(input_file, encoding) {
   rmarkdown::render(input_file,
     encoding=encoding,
     output_file=file.path(dirname(input_file), out_dir, 'AllFigures.html'))})
-subtitle: "Supplementary Information - All Figures and R Markdown"
 author: "David Lovell"
 date: "29/05/2022"
 output: html_document
 ---
 
+```{css, echo=FALSE}
+/*
+  This is used to enable right-floating figures in the HTML. See
+  https://stackoverflow.com/questions/2062258/floating-elements-within-a-div-floats-outside-of-div-why
+  https://bookdown.org/yihui/rmarkdown-cookbook/html-css.html
+*/
+span.clear { clear: right; display: block; }
+```
+
 # About this document
 
-This document provides the RMarkdown behind the figures and interactive visualisations in our paper for anyone who wants to see how they were created or who wishes to extend them. Some of these figures link to the [Desmos Graphing Calculator](https://www.desmos.com/). Desmos automatically ensures that the underlying code is available to copy and develop further and we provide RMarkdown for all other figures.
+This document provides the RMarkdown behind the figures and interactive visualisations in our paper for anyone who wants to see how they were created or who wishes to extend them.
+
+* Source code (Rmarkdown) is available from Github at [https://github.com/DavidRLovell/Never-mind-the-metrics](https://github.com/DavidRLovell/Never-mind-the-metrics)
+* Some of these figures link to the [Desmos Graphing Calculator](https://www.desmos.com/)
+  * Desmos automatically ensures that the underlying code is available to copy and develop further.
 
 ```{r setup, include=FALSE}
 # Start with a clean environment
@@ -168,7 +180,7 @@ make.confmat <- function(n) {
       post.P.n   =zdiv(TN,FN),                      # Posterior probability that actual class is NOT X
       MCC        =MCC(TP,FP,FN,TN),                 # Matthews correlation coefficient
       logDOR     =log(DOR),                         # log of DOR
-      slogDOR    =logDOR/log((Pos-1)*(Neg-1)),      # scaled log of DOR
+      #slogDOR    =logDOR/log((Pos-1)*(Neg-1)),     # scaled log of DOR
       J          =TPR + TNR - 1,                    # Youden's J, Balanced Accuracy
       Acc        =(TP+TN)/(Pos + Neg),              # Accuracy
       F1         =2*TP / (2*TP + FP + FN),          # F1
@@ -189,9 +201,57 @@ make.confmat(100) -> confmat.100
 make.confmat(101) -> confmat.101
 ```
 
-# Interactive visualisation of ROC and Precision-Recall reference points
+
+# All possible ROC and Precision-Recall reference points
+<div>
+```{r, echo=FALSE, out.width= "50%", out.extra='style="float:right; padding:10px"'}
+knitr::include_graphics("docs/images/screenshot-ROC-PRC.png")
+```
+
+http://bit.ly/see-ROC-reference-points shows all possible $(p+1)\times(n+1)$ points in ROC and Precision-Recall spaces corresponding to confusion matrices of size $N = p+n$, coloured from red (low) to blue (high) Balanced Accuracy. Users can change $N$ and $p$ by adjusting the sliders in the left hand side of the Desmos window.
+
+<span class="clear"></span>
+</div>
 
 
+# Confusion matrix performance metric contours
+<div>
+```{r, echo=FALSE, out.width= "50%", out.extra='style="float:right; padding:10px"'}
+  knitr::include_graphics("docs/images/screenshot-contours.png")
+```
+
+http://bit.ly/see-confusion-metrics enables us to interactively visualise a range of confusion matrix performance metrics by plotting their contours, coloured from red (low) to white (middle) to blue (high). 
+
+Users can change $Nt$ and $p$ by adjusting the sliders in the left hand side of the Desmos window, and can set the position of a test point by adjusting the $a_1$ and $d_1$ sliders. There are many things that users can turn on and off by clicking on the small round circles at the left edge of the screen:
+
+* **Contours of prevalence-dependent and prevalence independent metrics.** These switches are titled `Show Accuracy`, `Show MCC`, through to `Show Geometric Mean` and, when activated, display the contours of the chosen performance metrics
+* **Additional information and decoration** switches allow users to show all possible ROC points; a movable test point whose corresponding confusion matrix and performance metric values can be displayed; and various titles. Importantly, users can toggle the limits of what is displayed, so that performance metric contours _beyond_ ROC space can be visualised.
+
+<span class="clear"></span>
+</div>
+
+
+# Uncertainty in confusion matrices and their performance metrics
+
+<div>
+```{r, echo=FALSE, out.width= "50%", out.extra='style="float:right; padding:10px"'}
+  knitr::include_graphics("docs/images/screenshot-Beta-Binomial.png")
+```
+
+http://bit.ly/see-confusion-uncertainty enables interactive exploration of the posterior predictive pmfs of confusion matrices and three performance metrics (MCC, BA, $F_1$) under binomial and beta-binomial models of uncertainty. 
+
+Users can change $N$ and $p$ by adjusting the sliders in the left hand side of the Desmos window, and can set the position of a test point by adjusting the $a$ and $d$ sliders. There are many things that users can turn on and off by clicking on the small round circles at the left edge of the screen:
+
+* **Marginal and joint pmfs of True and False Positive rates.** Users can show these posterior predictive probability mass functions for confusion matrices of size $N=p+n$ under binomial and beta-binomial models of uncertainty, given that $a$ True Positives and $d$ True Negatives have been observed.
+* **Posterior predictive pmfs of MCC, BA and $F_1$** can be shown using the `Show PMF...` switches for each performance metric. There are also switches to show the unique performance metric values (`Show rug...`), the number of times these unique values are observed (`Show count...`) and a histogram summary of the probability mass functions (`Show histogram...`).
+* **Additional information and decoration** switches allow users to show all possible ROC points; a movable test point whose corresponding confusion matrix and performance metric values can be displayed; and various labels.
+* **item[Axis and point size scales** are sliders that allow users to adjust the size of the points used in the joint pmf display, the maximum of the performance metric pmfs y-axis ($P_{max}$), and the maximum of the performance metric counts y-axis  ($C_{max}$).
+
+<span class="clear"></span>
+
+As noted on the visualisation, Desmos supports lists of up to $10\,000$ elements, so $np$ must be $< 10\,001$ for the joint probability mass distributions to plot. This visualisation runs in your web browser and interaction becomes slow with larger values of $np$: we recommend starting with $N=60, p=20$.
+
+</div>
 
 
 # Display an interactive confusion simplex
