@@ -25,7 +25,7 @@ metric.abbr <- "Accuracy"
 
 These animated plots show how the contours of `r metric.name` change with class balance, i.e., as the number of negative examples ($n$) and positive examples ($p$) vary in confusion matrices of fixed size ($N$). 
 
-Each frame of this animation shows a two dimensional slice through the tetrahedral _confusion simplex_, a projection of the four dimensional confusion matrices of size $100$ into three dimensions. The animation shows slices sweeping from the edge of the simplex where $\mathrm{TP}=p, \mathrm{TN}=n$ through to the edge where $\mathrm{FN}=p, \mathrm{FP}=n$.
+Each frame of this animation shows a two dimensional slice through the tetrahedral [confusion simplex](https://davidrlovell.github.io/Never-mind-the-metrics/ConfusionSimplex.html), a projection of the four dimensional confusion matrices of size $100$ into three dimensions. The animation shows slices sweeping from the edge of the simplex where $\mathrm{TP}=p, \mathrm{TN}=n$ through to the edge where $\mathrm{FN}=p, \mathrm{FP}=n$.
 
 Each coloured point corresponds to a specific confusion matrix in which 
 $$

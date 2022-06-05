@@ -1,6 +1,6 @@
 ---
-title: "Interactive Confusion Simplex"
-subtitle: "Isometric 3D projection of confusion matrices"
+title: "Interactive Confusion Simplexes"
+subtitle: "Isometric 3D projections of confusion matrices"
 knit: (function(input_file, encoding) {
   out_dir <- 'docs';
   rmarkdown::render(input_file,
@@ -222,6 +222,35 @@ plot.simplex <- function(confmat, metric="MCC", Pos.vals=c(20, 50, 90)){
 }
 ```
 
+## Confusion simplex coloured by Accuracy
+
+
+```{r echo=FALSE}
+plot.simplex(confmat.100, metric="Acc")
+```
+
+* Mouse over the tetrahedron, then click and drag to change its orientation.
+* Click on the text `Pos==20` to toggle that slice of the confusion matrix.
+
+## Confusion simplex coloured by Balanced Accuracy
+
+
+```{r echo=FALSE}
+plot.simplex(confmat.100, metric="J")
+```
+
+* Mouse over the tetrahedron, then click and drag to change its orientation.
+* Click on the text `Pos==20` to toggle that slice of the confusion matrix.
+
+## Confusion simplex coloured by F1 Score
+
+
+```{r echo=FALSE}
+plot.simplex(confmat.100, metric="F1")
+```
+
+* Mouse over the tetrahedron, then click and drag to change its orientation.
+* Click on the text `Pos==20` to toggle that slice of the confusion matrix.
 
 ## Confusion simplex coloured by Matthews Correlation Coefficient
 
@@ -232,15 +261,6 @@ plot.simplex(confmat.100, metric="MCC")
 * Mouse over the tetrahedron, then click and drag to change its orientation.
 * Click on the text `Pos==20` to toggle that slice of the confusion matrix.
 
-## Confusion simplex coloured by Accuracy
-
-
-```{r echo=FALSE}
-plot.simplex(confmat.100, metric="Acc")
-```
-
-* Mouse over the tetrahedron, then click and drag to change its orientation.
-* Click on the text `Pos==20` to toggle that slice of the confusion matrix.
 
 ## About
 
