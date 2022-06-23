@@ -222,7 +222,7 @@ http://bit.ly/see-ROC-reference-points shows all possible $(p+1)\times(n+1)$ poi
 
 http://bit.ly/see-confusion-metrics enables us to interactively visualise a range of confusion matrix performance metrics by plotting their contours, coloured from red (low) to white (middle) to blue (high). 
 
-Users can change $Nt$ and $p$ by adjusting the sliders in the left hand side of the Desmos window, and can set the position of a test point by adjusting the $a_1$ and $d_1$ sliders. There are many things that users can turn on and off by clicking on the small round circles at the left edge of the screen:
+Users can change $N$ and $p$ by adjusting the sliders in the left hand side of the Desmos window, and can set the position of a test point by adjusting the $a_1$ and $d_1$ sliders. There are many things that users can turn on and off by clicking on the small round circles at the left edge of the screen:
 
 * **Contours of prevalence-dependent and prevalence independent metrics.** These switches are titled `Show Accuracy`, `Show MCC`, through to `Show Geometric Mean` and, when activated, display the contours of the chosen performance metrics
 * **Additional information and decoration** switches allow users to show all possible ROC points; a movable test point whose corresponding confusion matrix and performance metric values can be displayed; and various titles. Importantly, users can toggle the limits of what is displayed, so that performance metric contours _beyond_ ROC space can be visualised.
