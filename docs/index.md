@@ -16,19 +16,19 @@ layout: default
 
 ## Links to figures and interactive visualisations
 
-* All possible ROC and Precision-Recall reference points  [http://bit.ly/see-ROC-reference-points](http://bit.ly/see-ROC-reference-points) shows all possible $(p+1)\times(n+1)$ points in ROC and Precision-Recall spaces corresponding to confusion matrices of size $N = p+n$, coloured from red (low) to blue (high) Balanced Accuracy. Users can change $N$ and $p$ by adjusting the sliders in the left hand side of the Desmos window.
-* Confusion matrix performance metric contours  
+* **All possible ROC and Precision-Recall reference points**   [http://bit.ly/see-ROC-reference-points](http://bit.ly/see-ROC-reference-points) shows all possible points in ROC and Precision-Recall spaces corresponding to confusion matrices of a given size, coloured by Balanced Accuracy. 
+* **Confusion matrix performance metric contours**  
 [http://bit.ly/see-confusion-metrics](http://bit.ly/see-confusion-metrics) enables us to interactively visualise a range of confusion matrix performance metrics by plotting their contours, coloured from red (low) to white (middle) to blue (high). 
-* Uncertainty in confusion matrices and their performance metrics  
-[http://bit.ly/see-confusion-uncertainty](http://bit.ly/see-confusion-uncertainty) enables interactive exploration of the posterior predictive pmfs of confusion matrices and three performance metrics (MCC, BA, $F_1$) under binomial and beta-binomial models of uncertainty. 
-* Interactive confusion simplex  
-[http://bit.ly/see-confusion-simplex](http://bit.ly/see-confusion-simplex) shows an interactive visualisation of the 3D projection of binary confusion matrices of size 100. Each point corresponds to a unique confusion matrix and is coloured by the value of that matrix's Matthews Correlation Coefficient (MCC).
-* Animated performance metric contours  
-These animated plots show how the contours of various performance metrics change with class balance, i.e., as the number of negative examples ($n$) and positive examples ($p$) vary in confusion matrices of fixed size ($N$). We have created animations of
+* **Uncertainty in confusion matrices and their performance metrics**  
+[http://bit.ly/see-confusion-uncertainty](http://bit.ly/see-confusion-uncertainty) enables interactive exploration of the posterior predictive pmfs of confusion matrices and three performance metrics (MCC, BA, F1) under binomial and beta-binomial models of uncertainty. 
+* **Interactive confusion simplex**  
+[http://bit.ly/see-confusion-simplex](http://bit.ly/see-confusion-simplex) shows an interactive visualisation of the 3D projection of binary confusion matrices of size 100. Each point corresponds to a unique confusion matrix and is coloured by the value of that matrix's Matthews Correlation Coefficient.
+* **Animated performance metric contours**  
+These animated plots show how the contours of various performance metrics change with class balance, i.e., as the number of negative examples and positive examples vary in confusion matrices of fixed size. We have created animations of
   * Accuracy:                             [https://bit.ly/see-animated-accuracy](https://bit.ly/see-animated-accuracy)
   * Balanced Accuracy:                    [https://bit.ly/see-animated-BA](https://bit.ly/see-animated-BA)
-  * $F_1$ Score:                          [https://bit.ly/see-animated-F1](https://bit.ly/see-animated-F1)
+  * F1 Score:                             [https://bit.ly/see-animated-F1](https://bit.ly/see-animated-F1)
   * Matthews Correlation Coefficient:     [https://bit.ly/see-animated-MCC](https://bit.ly/see-animated-MCC)
 * [All figures in the manuscript](https://davidrlovell.github.io/Never-mind-the-metrics/AllFigures.html):  
 This document provides the RMarkdown behind the figures and interactive visualisations in our paper for anyone who wants to see how they were created or who wishes to extend them.
-  * Source code (Rmarkdown) is available from Github at [https://github.com/DavidRLovell/Never-mind-the-metrics](https://github.com/DavidRLovell/Never-mind-the-metrics)
+  * Source code (Rmarkdown) is available from Github at   [https://github.com/DavidRLovell/Never-mind-the-metrics](https://github.com/DavidRLovell/Never-mind-the-metrics)
