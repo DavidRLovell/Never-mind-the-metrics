@@ -179,10 +179,10 @@ plot.simplex <- function(confmat, metric="MCC", Pos.vals=c(20, 50, 90)){
     yaxis = list(visible=FALSE),
     zaxis = list(visible=FALSE),
     annotations=list(
-      list(x=N, y=000, z=000, showarrow=FALSE, text="TN", yanchor="top"),
+      list(x=N, y=000, z=000, showarrow=FALSE, text="FN", yanchor="top"),
       list(x=000, y=N, z=000, showarrow=FALSE, text="FP", yanchor="top"),
       list(x=000, y=000, z=N, showarrow=FALSE, text="TP", yanchor="bottom"),
-      list(x=-N/3, y=-N/3, z=-N/3, showarrow=FALSE, text="FN", yanchor="top")
+      list(x=-N/3, y=-N/3, z=-N/3, showarrow=FALSE, text="TN", yanchor="top")
     )
   )
   

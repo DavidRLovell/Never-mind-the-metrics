@@ -1,2 +1,3 @@
-# Never-mind-the-metrics
-Visualising confusion matrix performance metric distributions
+# Never mind the metrics
+## Visualising confusion matrix performance metric distributions
+
