@@ -6,7 +6,7 @@ knit: (function(input_file, encoding) {
     encoding=encoding,
     output_file=file.path(dirname(input_file), out_dir, 'AllFigures.html'))})
 author: "David Lovell"
-date: "29/05/2022"
+date: "January 2023"
 output: html_document
 ---
 
@@ -464,7 +464,9 @@ size <- 0.5
 ggplot(data=filter(confmat.100, Pos==p), aes(x=n-TN, y=TP)) + 
   geom_point(aes(colour=MCC), size=size) +
   scale_colour_gradient2() +
-  geom_line(data=MCC.contours, aes(x=n-d, y=a, group=k, colour=k), size=size) +
+  geom_line(
+    data=MCC.contours, 
+    aes(x=n-d, y=a, group=k, colour=k), linewidth=size) +
   coord_equal(expand = FALSE) +
   labs(caption="(a)", x="False Positives", y="True Positives") +
   theme(
@@ -681,7 +683,7 @@ plot.ddbinom.contour <- function(TP=16, FP=8, FN=4, TN=32, m=1){
   Neg <- FP+TN
   conf.bbd(TP, FP, FN, TP)  %>%
     filter(Probability > 1e-7) %>%
-    ggplot(aes(x=FP, y=TP, height=Probability)) + 
+    ggplot(aes(x=FP, y=TP)) + 
     geom_hline(yintercept=TP, lty=2) +
     geom_vline(xintercept=FP, lty=2) +
     geom_contour(aes(z=Probability,colour=after_stat(level))) +
@@ -706,4 +708,122 @@ p1 +  p4 + p16 + p64 +  plot_layout(nrow=1)
 ggsave("plots/pmfs.by.N.pdf", width=9, height=3)
 ```
 
+```{r echo=FALSE}
+plot.ddbinom.contour.MCC <- function(TP=16, FP=8, FN=4, TN=32, m=1){
+  TP <- TP * m; FP <- FP *m
+  FN <- FN * m; TN <- TN *m
+  
+  Pos <- TP+FN
+  Neg <- FP+TN
+  
+  expand.grid(
+    k=seq(from=-0.9, to=0.9, by=0.1),
+    p=Pos,
+    n=Neg,
+    d=seq(from=0, to=Neg, length.out=101)) %>%
+    as_tibble() %>%
+    mutate(a=MCC.contour(k, p, n, d)) %>%
+    na.omit()   -> MCC.contours
+
+  conf.bbd(TP, FP, FN, TP)  %>%
+    filter(Probability > 1e-7) %>%
+    ggplot(aes(x=FP, y=TP)) + 
+    geom_line(
+      data=MCC.contours, 
+      aes(x=n-d, y=a, group=k, colour=k), linewidth=size) +
+    geom_hline(yintercept=TP, lty=2) +
+    geom_vline(xintercept=FP, lty=2) +
+    geom_contour(aes(z=Probability,colour=after_stat(level))) +
+    geom_contour(aes(z=Probability), colour=c.low) +
+    scale_colour_gradient2() +
+    coord_fixed(ratio=(Neg+1)/(Pos+1), xlim=c(0,Neg), ylim=c(0,Pos), expand=TRUE) +
+    labs(title=sprintf("N = %d",Pos+Neg), subtitle = sprintf("p + n = %d + %d",Pos,Neg),
+         caption=sprintf("TP=%d FP=%d\nFN=%d TN=%d", TP, FP, FN, TP)) +
+    theme(legend.position = "none")
+}
+```
+
+```{r}
+plot.ddbinom.contour.MCC(m=001)
+```
+
+```{r}
+plot.ddbinom.contour.MCC <- function(TP=16, FP=8, FN=4, TN=32, m=1){
+
+  TP <- TP * m; FP <- FP *m
+  FN <- FN * m; TN <- TN *m
+  
+  Pos <- TP+FN
+  Neg <- FP+TN
+  
+  expand.grid(
+    k=seq(from=-0.9, to=0.9, by=0.1),
+    p=Pos,
+    n=Neg,
+    d=seq(from=0, to=Neg, length.out=201)) %>%
+    as_tibble() %>%
+    mutate(a=MCC.contour(k, p, n, d), b=n-d) %>%
+    na.omit() %>%
+    group_by(k) %>% 
+    arrange(b, k) %>% ungroup() -> MCC.contours
+
+  conf.bbd(TP, FP, FN, TP)  %>%
+    filter(Probability > 1e-7) %>%
+    ggplot(aes(x=FP, y=TP)) +
+    # Can't get this working for contours below the diagonal
+    # 
+    # geom_area(
+    #   data=MCC.contours %>% filter(k >= 0), 
+    #   aes(x=b, y=a, group=k, fill=k),
+    #   stat = "identity",
+    #   position = "identity",
+    #   orientation = "y"
+    # ) + 
+    # The following achieve a similar result via alpha blending
+    geom_area(
+      data=MCC.contours %>% filter(k > 0), 
+      aes(x=b, y=a, group=k), fill=muted("blue"), alpha=1/9,
+      stat = "identity",
+      position = "identity",
+      orientation = "y"
+    ) + 
+    geom_area(
+      data=MCC.contours %>% filter(k < 0), 
+      aes(x=b, y=a, group=k), fill=muted("red"), alpha=1/9,
+      stat = "identity",
+      position = "identity",
+      orientation = "x"
+    ) + 
+    geom_line(
+      data=MCC.contours, 
+      aes(x=b, y=a, group=k, colour=k), linewidth=0.1) +
+    geom_hline(yintercept=TP, lty=2, linewidth=0.1) +
+    geom_vline(xintercept=FP, lty=2, linewidth=0.1) +
+    geom_contour(aes(z=Probability), colour="black", linewidth=0.2) +
+    scale_colour_gradient2(name="MCC", limits=c(-1,1) ) +
+    coord_fixed(ratio=(Neg+1)/(Pos+1), xlim=c(0,Neg), ylim=c(0,Pos), expand=TRUE) +
+    labs(title=sprintf("N = %d",Pos+Neg), subtitle = sprintf("p + n = %d + %d",Pos,Neg),
+         caption=sprintf("TP=%d FP=%d\nFN=%d TN=%d", TP, FP, FN, TP)) +
+    theme(legend.position = "none")
+}
+```
+
+```{r echo=FALSE}
+#plot.ddbinom.contour.MCC(m=001)            -> p1
+#plot.ddbinom.contour.MCC(m=004) + ylab("") -> p4
+#plot.ddbinom.contour.MCC(m=016) + ylab("") -> p16
+#plot.ddbinom.contour.MCC(m=064) + ylab("") -> p64
+
+plot.ddbinom.contour.MCC(m=001)  -> p1
+plot.ddbinom.contour.MCC(m=004)  -> p4
+plot.ddbinom.contour.MCC(m=016)  -> p16
+plot.ddbinom.contour.MCC(m=064)  + theme(legend.position=c(0.75,0.5))-> p64
+
+p1 +  p4 + p16 + p64 +  plot_layout(nrow=1)
+```
+
+```{r echo=FALSE, eval=FALSE}
+pdf.scale <- 1.2
+ggsave("plots/pmfs.by.N.MCC.pdf", width=9 * pdf.scale, height=3 * pdf.scale)
+```
 

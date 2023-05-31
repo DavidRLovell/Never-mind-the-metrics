@@ -2,7 +2,7 @@
 title: "Animation of Accuracy"
 subtitle: "How performance metric contours change with class balance"
 author: "Jaiden Capra and David Lovell (David.Lovell@qut.edu.au)"
-date: "04/06/2022"
+date: "January 2023"
 knit: (function(input_file, encoding) {
   out_dir <- 'docs';
   rmarkdown::render(input_file,
@@ -19,7 +19,7 @@ metric.abbr <- "Accuracy"
 
 ---
 
-![](docs/images/accuracy.gif)
+![](docs/images/Accuracy-1.m4v)
 
 ---
 
