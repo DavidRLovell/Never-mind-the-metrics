@@ -8,6 +8,8 @@ knit: (function(input_file, encoding) {
 author: "David Lovell"
 date: "January 2023"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{css, echo=FALSE}
@@ -292,10 +294,10 @@ plot.simplex <- function(confmat, metric="MCC", Pos.vals=c(20, 50, 90)){
     yaxis = list(visible=FALSE),
     zaxis = list(visible=FALSE),
     annotations=list(
-      list(x=N, y=000, z=000, showarrow=FALSE, text="TN", yanchor="top"),
-      list(x=000, y=N, z=000, showarrow=FALSE, text="FP", yanchor="top"),
-      list(x=000, y=000, z=N, showarrow=FALSE, text="TP", yanchor="bottom"),
-      list(x=-N/3, y=-N/3, z=-N/3, showarrow=FALSE, text="FN", yanchor="top")
+      list(x=N,    y=000,  z= 000, showarrow=FALSE, text="FN", yanchor="top"),
+      list(x=000,  y=N,    z= 000, showarrow=FALSE, text="FP", yanchor="top"),
+      list(x=000,  y=000,  z= N  , showarrow=FALSE, text="TP", yanchor="bottom"),
+      list(x=-N/3, y=-N/3, z=-N/3, showarrow=FALSE, text="TN", yanchor="top")
     )
   )
   
@@ -482,7 +484,7 @@ p1
 ggplot(data=filter(confmat.100, Pos==20), aes(x=(n-TN)/n, y=TP/20)) + 
   geom_point(aes(colour=MCC), size=size) +
   scale_colour_gradient2() +
-  geom_line(data=MCC.contours, aes(x=(n-d)/n, y=a/20, group=k, colour=k), size=size) +
+  geom_line(data=MCC.contours, aes(x=(n-d)/n, y=a/20, group=k, colour=k), linewidth=size) +
   coord_equal(expand = FALSE) +
   scale_x_continuous(breaks=0:1) +
   scale_y_continuous(breaks=0:1) +
@@ -619,7 +621,8 @@ conf.bbd(
 
 filter(confmat.60, Pos==20) %>% select(TP, FP, F1) %>% add_count(F1) %>% filter(n==11) -> confmat.60.F1.11
 
-left_join(confmat.60.F1.11, C, 'TP'='TP', 'FP'='FP') -> confmat.60.F1.11.P
+#left_join(confmat.60.F1.11, C, 'TP'='TP', 'FP'='FP') -> confmat.60.F1.11.P
+left_join(confmat.60.F1.11, C, by=c('TP','FP')) -> confmat.60.F1.11.P
 # unique(confmat.60.F1.11.P$F1)
 
 expand.grid(
@@ -708,6 +711,7 @@ p1 +  p4 + p16 + p64 +  plot_layout(nrow=1)
 ggsave("plots/pmfs.by.N.pdf", width=9, height=3)
 ```
 
+We can add the contours of a performance metric (in this case MCC) in the background:
 ```{r echo=FALSE}
 plot.ddbinom.contour.MCC <- function(TP=16, FP=8, FN=4, TN=32, m=1){
   TP <- TP * m; FP <- FP *m
@@ -743,11 +747,7 @@ plot.ddbinom.contour.MCC <- function(TP=16, FP=8, FN=4, TN=32, m=1){
 }
 ```
 
-```{r}
-plot.ddbinom.contour.MCC(m=001)
-```
-
-```{r}
+```{r echo=FALSE}
 plot.ddbinom.contour.MCC <- function(TP=16, FP=8, FN=4, TN=32, m=1){
 
   TP <- TP * m; FP <- FP *m
@@ -809,20 +809,23 @@ plot.ddbinom.contour.MCC <- function(TP=16, FP=8, FN=4, TN=32, m=1){
 ```
 
 ```{r echo=FALSE}
-#plot.ddbinom.contour.MCC(m=001)            -> p1
-#plot.ddbinom.contour.MCC(m=004) + ylab("") -> p4
-#plot.ddbinom.contour.MCC(m=016) + ylab("") -> p16
-#plot.ddbinom.contour.MCC(m=064) + ylab("") -> p64
-
 plot.ddbinom.contour.MCC(m=001)  -> p1
 plot.ddbinom.contour.MCC(m=004)  -> p4
 plot.ddbinom.contour.MCC(m=016)  -> p16
-plot.ddbinom.contour.MCC(m=064)  + theme(legend.position=c(0.75,0.5))-> p64
+plot.ddbinom.contour.MCC(m=064)  -> p64
 
 p1 +  p4 + p16 + p64 +  plot_layout(nrow=1)
 ```
 
 ```{r echo=FALSE, eval=FALSE}
+# Use this for the pdf figure
+plot.ddbinom.contour.MCC(m=001)  -> p1
+plot.ddbinom.contour.MCC(m=004)  -> p4
+plot.ddbinom.contour.MCC(m=016)  -> p16
+plot.ddbinom.contour.MCC(m=064)  + theme(legend.position=c(0.75,0.5)) -> p64
+
+p1 +  p4 + p16 + p64 +  plot_layout(nrow=1)
+
 pdf.scale <- 1.2
 ggsave("plots/pmfs.by.N.MCC.pdf", width=9 * pdf.scale, height=3 * pdf.scale)
 ```

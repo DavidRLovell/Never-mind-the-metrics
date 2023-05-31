@@ -19,7 +19,7 @@ metric.abbr <- "Accuracy"
 
 ---
 
-![](docs/images/Accuracy-1.m4v)
+![](docs/images/Accuracy-1.m4v){width=100%}
 
 ---
 

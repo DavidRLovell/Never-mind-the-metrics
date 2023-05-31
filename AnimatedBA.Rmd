@@ -19,7 +19,7 @@ metric.abbr <- "BA"
 
 ---
 
-![](docs/images/J-1.m4v)
+![](docs/images/J-1.m4v){width=100%}
 
 ---
 

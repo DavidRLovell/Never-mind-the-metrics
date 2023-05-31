@@ -19,7 +19,7 @@ metric.abbr <- "F1"
 
 ---
 
-![](docs/images/F1-1.m4v)
+![](docs/images/F1-1.m4v){width=100%}
 
 ---
 

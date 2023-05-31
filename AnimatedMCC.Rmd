@@ -19,7 +19,7 @@ metric.abbr <- "MCC"
 
 ---
 
-![](docs/images/Mcc-1.m4v)
+![](docs/images/Mcc-1.m4v){width=100%}
 
 ---
 
