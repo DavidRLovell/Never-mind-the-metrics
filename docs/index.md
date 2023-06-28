@@ -4,11 +4,11 @@ layout: default
 
 # Never mind the metrics---Visualising binary confusion matrix performance metric distributions to put performance in perspective
 ## by David Lovell, Dimity Miller, Jaiden Capra and Andrew Bradley
-### Source code and interactive visualisations at  
-[davidrlovell.github.io/Never-mind-the-metrics](https://davidrlovell.github.io/Never-mind-the-metrics/)
 
 **Paper to appear**: in ICML23  
-**Preprint**: [https://arxiv.org/abs/2206.02157](https://arxiv.org/abs/2206.02157)
+**Preprint**: [https://arxiv.org/abs/2206.02157](https://arxiv.org/abs/2206.02157)  
+**Interactive visualisations**: [https://davidrlovell.github.io/Never-mind-the-metrics](https://davidrlovell.github.io/Never-mind-the-metrics/)
+**Source code**: [https://github.com/DavidRLovell/Never-mind-the-metrics](https://github.com/DavidRLovell/Never-mind-the-metrics)
 
 **TL;DR:** Uncertainty in classifier performance metrics can easily eclipse differences in classifier performance; rather than searching for the "best" performance metric, we should put more effort into gathering representative data.
 
@@ -33,4 +33,3 @@ These animated plots show how the contours of various performance metrics change
   * Matthews Correlation Coefficient:     [https://bit.ly/see-animated-MCC](https://bit.ly/see-animated-MCC)
 * [All figures in the manuscript](https://davidrlovell.github.io/Never-mind-the-metrics/AllFigures.html):  
 This document provides the RMarkdown behind the figures and interactive visualisations in our paper for anyone who wants to see how they were created or who wishes to extend them.
-  * Source code (Rmarkdown) is available from Github at   [https://github.com/DavidRLovell/Never-mind-the-metrics](https://github.com/DavidRLovell/Never-mind-the-metrics)
