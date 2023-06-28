@@ -2,11 +2,12 @@
 layout: default
 ---
 
-# Never mind the metrics---Visualising confusion matrix performance metric distributions
+# Never mind the metrics---Visualising binary confusion matrix performance metric distributions to put performance in perspective
 ## by David Lovell, Dimity Miller, Jaiden Capra and Andrew Bradley
-### Source code and interactive visualisations
+### Source code and interactive visualisations at [davidrlovell.github.io/Never-mind-the-metrics](https://davidrlovell.github.io/Never-mind-the-metrics/)
 
-**Full paper**: [https://arxiv.org/abs/2206.02157](https://arxiv.org/abs/2206.02157)
+**Paper to appear**: in ICML23  
+**Preprint**: [https://arxiv.org/abs/2206.02157](https://arxiv.org/abs/2206.02157)
 
 **TL;DR:** Uncertainty in classifier performance metrics can easily eclipse differences in classifier performance; rather than searching for the "best" performance metric, we should put more effort into gathering representative data.
 
