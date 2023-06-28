@@ -7,7 +7,7 @@ layout: default
 
 **Paper to appear**: in ICML23  
 **Preprint**: [https://arxiv.org/abs/2206.02157](https://arxiv.org/abs/2206.02157)  
-**Interactive visualisations**: [https://davidrlovell.github.io/Never-mind-the-metrics](https://davidrlovell.github.io/Never-mind-the-metrics/)
+**Interactive visualisations**: [https://davidrlovell.github.io/Never-mind-the-metrics](https://davidrlovell.github.io/Never-mind-the-metrics/)  
 **Source code**: [https://github.com/DavidRLovell/Never-mind-the-metrics](https://github.com/DavidRLovell/Never-mind-the-metrics)
 
 **TL;DR:** Uncertainty in classifier performance metrics can easily eclipse differences in classifier performance; rather than searching for the "best" performance metric, we should put more effort into gathering representative data.
